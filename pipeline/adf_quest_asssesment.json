@@ -44,19 +44,7 @@
 						}
 					},
 					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "Json_blob_LS",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "Json_blob_LS",
-						"type": "DatasetReference"
-					}
-				]
+				}
 			},
 			{
 				"name": "Web_pr_data",
@@ -118,12 +106,6 @@
 					},
 					"enableStaging": false
 				},
-				"outputs": [
-					{
-						"referenceName": "Json_blob_LS",
-						"type": "DatasetReference"
-					}
-				],
 				"linkedServiceName": {
 					"referenceName": "restresource1",
 					"type": "LinkedServiceReference"
