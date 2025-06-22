@@ -1,0 +1,12 @@
+{
+	"name": "HttpServer_LS",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://download.bls.gov/pub/time.series/pr",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
