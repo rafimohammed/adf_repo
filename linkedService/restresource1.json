@@ -1,0 +1,12 @@
+{
+	"name": "restresource1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "RestService",
+		"typeProperties": {
+			"authenticationType": "Anonymous",
+			"url": "https://download.bls.gov/pub/time.series/pr/"
+		},
+		"annotations": []
+	}
+}

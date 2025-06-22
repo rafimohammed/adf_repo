@@ -1,0 +1,9 @@
+{
+	"name": "azure-quest",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1f9d198e-b6fb-4c86-adab-d2f46c190d8f",
+		"tenantId": "6962d6a2-3230-476b-b5b0-b6378932bd82"
+	}
+}
