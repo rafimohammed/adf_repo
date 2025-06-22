@@ -31,17 +31,21 @@
 			"type": "string",
 			"defaultValue": "0618-172337-8rh3cvy1"
 		},
-		"restresource1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://download.bls.gov/pub/time.series/pr/"
-		},
 		"HttpServer_LS_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://download.bls.gov/pub/time.series/pr"
+			"defaultValue": "https://download.bls.gov/pub/time.series/pr/pr.data.0.Current"
 		},
 		"HttpServer_LS_usadata_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://datausa.io/about/api/data"
+			"defaultValue": "https://datausa.io/api/"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datausa.io/api"
+		},
+		"restresource1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://download.bls.gov/pub/time.series/pr/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -88,14 +92,17 @@
 					"DatabricksLinkedService_properties_typeProperties_existingClusterId": {
 						"value": "[parameters('DatabricksLinkedService_properties_typeProperties_existingClusterId')]"
 					},
-					"restresource1_properties_typeProperties_url": {
-						"value": "[parameters('restresource1_properties_typeProperties_url')]"
-					},
 					"HttpServer_LS_properties_typeProperties_url": {
 						"value": "[parameters('HttpServer_LS_properties_typeProperties_url')]"
 					},
 					"HttpServer_LS_usadata_properties_typeProperties_url": {
 						"value": "[parameters('HttpServer_LS_usadata_properties_typeProperties_url')]"
+					},
+					"RestService1_properties_typeProperties_url": {
+						"value": "[parameters('RestService1_properties_typeProperties_url')]"
+					},
+					"restresource1_properties_typeProperties_url": {
+						"value": "[parameters('restresource1_properties_typeProperties_url')]"
 					}
 				}
 			},

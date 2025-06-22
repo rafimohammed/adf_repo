@@ -23,14 +23,17 @@
 		"DatabricksLinkedService_properties_typeProperties_existingClusterId": {
 			"value": "0618-172337-8rh3cvy1"
 		},
-		"restresource1_properties_typeProperties_url": {
-			"value": "https://download.bls.gov/pub/time.series/pr/"
-		},
 		"HttpServer_LS_properties_typeProperties_url": {
-			"value": "https://download.bls.gov/pub/time.series/pr"
+			"value": "https://download.bls.gov/pub/time.series/pr/pr.data.0.Current"
 		},
 		"HttpServer_LS_usadata_properties_typeProperties_url": {
-			"value": "https://datausa.io/about/api/data"
+			"value": "https://datausa.io/api/"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://datausa.io/api"
+		},
+		"restresource1_properties_typeProperties_url": {
+			"value": "https://download.bls.gov/pub/time.series/pr/"
 		}
 	}
 }

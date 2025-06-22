@@ -31,17 +31,21 @@
 			"type": "string",
 			"defaultValue": "0618-172337-8rh3cvy1"
 		},
-		"restresource1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://download.bls.gov/pub/time.series/pr/"
-		},
 		"HttpServer_LS_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://download.bls.gov/pub/time.series/pr"
+			"defaultValue": "https://download.bls.gov/pub/time.series/pr/pr.data.0.Current"
 		},
 		"HttpServer_LS_usadata_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://datausa.io/about/api/data"
+			"defaultValue": "https://datausa.io/api/"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datausa.io/api"
+		},
+		"restresource1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://download.bls.gov/pub/time.series/pr/"
 		}
 	},
 	"variables": {
@@ -89,20 +93,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/restresource1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "RestService",
-				"typeProperties": {
-					"url": "[parameters('restresource1_properties_typeProperties_url')]",
-					"authenticationType": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/HttpServer_LS')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -133,56 +123,33 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/restapi_dataset')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/RestService1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "HttpServer_LS",
-					"type": "LinkedServiceReference"
-				},
 				"annotations": [],
-				"type": "DelimitedText",
+				"type": "RestService",
 				"typeProperties": {
-					"location": {
-						"type": "HttpServerLocation"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
+					"url": "[parameters('RestService1_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/HttpServer_LS')]"
-			]
+			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/restapi_delimited')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/restresource1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "HttpServer_LS_usadata",
-					"type": "LinkedServiceReference"
-				},
 				"annotations": [],
-				"type": "DelimitedText",
+				"type": "RestService",
 				"typeProperties": {
-					"location": {
-						"type": "HttpServerLocation"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
+					"url": "[parameters('restresource1_properties_typeProperties_url')]",
+					"authenticationType": "Anonymous"
+				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/HttpServer_LS_usadata')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Json_pr_dataset')]",
@@ -229,7 +196,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "usa",
+						"folderPath": "datausa",
 						"container": "questblsdata"
 					}
 				},
@@ -237,6 +204,79 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/BlobStorageLinkedService')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResource1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestService1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": "data?drilldowns=Nation&measures=Population"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestService1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/restapi_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HttpServer_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					},
+					"columnDelimiter": "\t",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HttpServer_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/restapi_delimited')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HttpServer_LS_usadata",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HttpServer_LS_usadata')]"
 			]
 		},
 		{
@@ -269,7 +309,9 @@
 								"type": "DelimitedTextSource",
 								"storeSettings": {
 									"type": "HttpReadSettings",
-									"requestMethod": "GET"
+									"requestMethod": "GET",
+									"additionalHeaders": "User-Agent: quest/1.0 quest.email@example.com)",
+									"requestTimeout": ""
 								},
 								"formatSettings": {
 									"type": "DelimitedTextReadSettings"
@@ -326,7 +368,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Web_pr_data",
+								"activity": "Web_usa_data",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -342,13 +384,12 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "HttpReadSettings",
-									"requestMethod": "GET"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
 								}
 							},
 							"sink": {
@@ -364,7 +405,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "restapi_delimited",
+								"referenceName": "RestResource1",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -413,6 +454,24 @@
 							"referenceName": "DatabricksLinkedService",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Web_usa_data",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "GET",
+							"headers": {},
+							"url": "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
+						}
 					}
 				],
 				"policy": {
@@ -424,8 +483,8 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/restapi_dataset')]",
 				"[concat(variables('factoryId'), '/datasets/Json_pr_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/RestResource1')]",
 				"[concat(variables('factoryId'), '/datasets/Json_usa_dataset')]",
-				"[concat(variables('factoryId'), '/datasets/restapi_delimited')]",
 				"[concat(variables('factoryId'), '/linkedServices/DatabricksLinkedService')]"
 			]
 		},
