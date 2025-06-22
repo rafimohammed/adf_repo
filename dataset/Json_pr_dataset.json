@@ -1,0 +1,23 @@
+{
+	"name": "Json_pr_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BlobStorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "pr.data.0.Current",
+				"folderPath": "pr",
+				"container": "questblsdata"
+			}
+		},
+		"schema": {}
+	}
+}
