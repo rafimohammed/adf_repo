@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "azure-quest"
+		},
+		"BlobStorageLinkedService_servicePrincipalCredential": {
+			"value": ""
+		},
+		"DatabricksLinkedService_accessToken": {
+			"value": ""
+		},
+		"BlobStorageLinkedService_properties_typeProperties_serviceEndpoint": {
+			"value": "https://practicemyazure.blob.core.windows.net/"
+		},
+		"BlobStorageLinkedService_properties_typeProperties_tenant": {
+			"value": "6962d6a2-3230-476b-b5b0-b6378932bd82"
+		},
+		"BlobStorageLinkedService_properties_typeProperties_servicePrincipalId": {
+			"value": "8ce3aeb0-2880-41fd-b2e4-4b35a2811d95"
+		},
+		"DatabricksLinkedService_properties_typeProperties_existingClusterId": {
+			"value": "0618-172337-8rh3cvy1"
+		},
+		"restresource1_properties_typeProperties_url": {
+			"value": "https://download.bls.gov/pub/time.series/pr/"
+		},
+		"HttpServer_LS_properties_typeProperties_url": {
+			"value": "https://download.bls.gov/pub/time.series/pr"
+		},
+		"HttpServer_LS_usadata_properties_typeProperties_url": {
+			"value": "https://datausa.io/about/api/data"
+		}
+	}
+}
