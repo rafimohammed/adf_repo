@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://datausa.io/api/data?drilldowns=Nation&measures=Population",
+			"url": "https://datausa.io/api/",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
