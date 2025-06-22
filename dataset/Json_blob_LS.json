@@ -17,7 +17,7 @@
 				"folderPath": "pr",
 				"container": "questblsdata"
 			},
-			"columnDelimiter": "\\",
+			"columnDelimiter": "",
 			"rowDelimiter": "",
 			"encodingName": "UTF-8",
 			"escapeChar": "\\",
