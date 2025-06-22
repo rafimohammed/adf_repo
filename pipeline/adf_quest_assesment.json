@@ -27,7 +27,7 @@
 						"storeSettings": {
 							"type": "HttpReadSettings",
 							"requestMethod": "GET",
-							"additionalHeaders": "\"User-Agent\": \"quest/quest@gmail.com\"",
+							"additionalHeaders": "User-Agent: quest/1.0 quest.email@example.com)",
 							"requestTimeout": ""
 						},
 						"formatSettings": {
