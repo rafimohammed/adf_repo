@@ -184,9 +184,6 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "GET",
-					"headers": {
-						"User-Agent": "quest/quest@gmail.com"
-					},
 					"url": "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
 				}
 			}
