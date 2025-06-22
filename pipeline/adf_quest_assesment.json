@@ -27,7 +27,7 @@
 						"storeSettings": {
 							"type": "HttpReadSettings",
 							"requestMethod": "GET",
-							"additionalHeaders": "\"Additional headers\": {\n    \"Authorization: Bearer xyz\": \"value\"\n}",
+							"additionalHeaders": "\"headers\": {\n                        \"User-Agent\": \"quest/quest@gmail.com\"\n                    }",
 							"requestTimeout": ""
 						},
 						"formatSettings": {
@@ -103,7 +103,6 @@
 						"storeSettings": {
 							"type": "HttpReadSettings",
 							"requestMethod": "GET",
-							"additionalHeaders": "\"Additional headers\": {\n    \"Authorization: Bearer xyz\": \"value\"\n}",
 							"requestTimeout": ""
 						},
 						"formatSettings": {
