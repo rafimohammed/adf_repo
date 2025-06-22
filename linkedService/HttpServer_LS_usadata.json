@@ -1,0 +1,12 @@
+{
+	"name": "HttpServer_LS_usadata",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://datausa.io/about/api/data",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
