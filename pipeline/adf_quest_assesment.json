@@ -81,7 +81,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Web_pr_data",
+						"activity": "Web_usa_data",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -165,6 +165,26 @@
 				"linkedServiceName": {
 					"referenceName": "DatabricksLinkedService",
 					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Web_usa_data",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"headers": {
+						"User-Agent": "quest/quest@gmail.com"
+					},
+					"url": "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
 				}
 			}
 		],
