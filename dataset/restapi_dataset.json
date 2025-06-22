@@ -11,7 +11,8 @@
 			"location": {
 				"type": "HttpServerLocation"
 			},
-			"columnDelimiter": "",
+			"columnDelimiter": "\t",
+			"rowDelimiter": "\n",
 			"escapeChar": "\\",
 			"firstRowAsHeader": false,
 			"quoteChar": "\""
