@@ -145,7 +145,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Json_blob_LS",
+						"referenceName": "Json_blob",
 						"type": "DatasetReference"
 					}
 				],
