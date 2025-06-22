@@ -102,21 +102,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET",
-							"requestBody": {
-								"value": "@activity('Web_usa_data').output",
-								"type": "Expression"
-							},
-							"requestTimeout": ""
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
-					},
 					"sink": {
 						"type": "JsonSink",
 						"storeSettings": {
@@ -128,12 +113,6 @@
 					},
 					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "restapi_delimited",
-						"type": "DatasetReference"
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "Json_usa_dataset",
