@@ -196,6 +196,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"fileName": "population.json",
 						"folderPath": "datausa",
 						"container": "questblsdata"
 					}
