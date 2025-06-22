@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://download.bls.gov/pub/time.series/pr",
+			"url": "https://download.bls.gov/pub/time.series/pr/pr.data.0.Current",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
