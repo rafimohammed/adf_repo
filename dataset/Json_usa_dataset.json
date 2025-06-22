@@ -1,0 +1,22 @@
+{
+	"name": "Json_usa_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BlobStorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "usa",
+				"container": "questblsdata"
+			}
+		},
+		"schema": {}
+	}
+}
