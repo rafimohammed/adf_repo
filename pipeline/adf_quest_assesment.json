@@ -28,10 +28,6 @@
 							"type": "HttpReadSettings",
 							"requestMethod": "GET",
 							"additionalHeaders": "\"User-Agent\": \"quest/quest@gmail.com\"",
-							"requestBody": {
-								"value": "@activity('Web_pr_data').output",
-								"type": "Expression"
-							},
 							"requestTimeout": ""
 						},
 						"formatSettings": {
