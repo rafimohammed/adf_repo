@@ -28,4 +28,4 @@ jobs:
           resourceGroupName: rg-blobstorage
           template: ./main.bicep
           parameters: >
-            factoryName='azure-quest'
+            factoryName=azure-quest
