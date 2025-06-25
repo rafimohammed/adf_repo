@@ -1,0 +1,207 @@
+resource factoryName_adf_quest_assesment 'Microsoft.DataFactory/factories/pipelines@2018-06-01' = {
+  name: '${factoryName}/adf_quest_assesment'
+  properties: {
+    activities: [
+      {
+        name: 'cp_pr_data'
+        type: 'Copy'
+        dependsOn: [
+          {
+            activity: 'Web_pr_data'
+            dependencyConditions: [
+              'Succeeded'
+            ]
+          }
+        ]
+        policy: {
+          timeout: '0.12:00:00'
+          retry: 0
+          retryIntervalInSeconds: 30
+          secureOutput: false
+          secureInput: false
+        }
+        userProperties: []
+        typeProperties: {
+          source: {
+            type: 'DelimitedTextSource'
+            storeSettings: {
+              type: 'HttpReadSettings'
+              requestMethod: 'GET'
+              additionalHeaders: {
+  		'User-Agent': 'quest-data-pipeline/1.0'
+		}
+            }
+            formatSettings: {
+              type: 'DelimitedTextReadSettings'
+            }
+          }
+          sink: {
+            type: 'JsonSink'
+            storeSettings: {
+              type: 'AzureBlobStorageWriteSettings'
+            }
+            formatSettings: {
+              type: 'JsonWriteSettings'
+            }
+          }
+          enableStaging: false
+        }
+        inputs: [
+          {
+            referenceName: 'restapi_dataset'
+            type: 'DatasetReference'
+            parameters: {}
+          }
+        ]
+        outputs: [
+          {
+            referenceName: 'Json_pr_dataset'
+            type: 'DatasetReference'
+            parameters: {}
+          }
+        ]
+      }
+      {
+        name: 'Web_pr_data'
+        type: 'WebActivity'
+        dependsOn: []
+        policy: {
+          timeout: '0.12:00:00'
+          retry: 0
+          retryIntervalInSeconds: 30
+          secureOutput: false
+          secureInput: false
+        }
+        userProperties: []
+        typeProperties: {
+          method: 'GET'
+          headers: {
+            'User-Agent': 'quest/quest@gmail.com'
+          }
+          url: 'https://download.bls.gov/pub/time.series/pr/'
+        }
+      }
+      {
+        name: 'cp_usa_data'
+        type: 'Copy'
+        dependsOn: [
+          {
+            activity: 'Web_usa_data'
+            dependencyConditions: [
+              'Succeeded'
+            ]
+          }
+        ]
+        policy: {
+          timeout: '0.12:00:00'
+          retry: 0
+          retryIntervalInSeconds: 30
+          secureOutput: false
+          secureInput: false
+        }
+        userProperties: []
+        typeProperties: {
+          source: {
+            type: 'RestSource'
+            httpRequestTimeout: '00:01:40'
+            requestInterval: '00.00:00:00.010'
+            requestMethod: 'GET'
+            paginationRules: {
+              supportRFC5988: 'true'
+            }
+          }
+          sink: {
+            type: 'JsonSink'
+            storeSettings: {
+              type: 'AzureBlobStorageWriteSettings'
+            }
+            formatSettings: {
+              type: 'JsonWriteSettings'
+            }
+          }
+          enableStaging: false
+        }
+        inputs: [
+          {
+            referenceName: 'RestResource1'
+            type: 'DatasetReference'
+            parameters: {}
+          }
+        ]
+        outputs: [
+          {
+            referenceName: 'Json_usa_dataset'
+            type: 'DatasetReference'
+            parameters: {}
+          }
+        ]
+        linkedServiceName: {
+          referenceName: 'restresource1'
+          type: 'LinkedServiceReference'
+        }
+      }
+      {
+        name: 'quest_nb'
+        type: 'DatabricksNotebook'
+        dependsOn: [
+          {
+            activity: 'cp_pr_data'
+            dependencyConditions: [
+              'Succeeded'
+            ]
+          }
+          {
+            activity: 'cp_usa_data'
+            dependencyConditions: [
+              'Succeeded'
+            ]
+          }
+        ]
+        policy: {
+          timeout: '0.12:00:00'
+          retry: 0
+          retryIntervalInSeconds: 30
+          secureOutput: false
+          secureInput: false
+        }
+        userProperties: []
+        typeProperties: {
+          notebookPath: '/Users/rafimehrunvali@gmail.com/quest_data_transform'
+        }
+        linkedServiceName: {
+          referenceName: 'DatabricksLinkedService'
+          type: 'LinkedServiceReference'
+        }
+      }
+      {
+        name: 'Web_usa_data'
+        type: 'WebActivity'
+        dependsOn: []
+        policy: {
+          timeout: '0.12:00:00'
+          retry: 0
+          retryIntervalInSeconds: 30
+          secureOutput: false
+          secureInput: false
+        }
+        userProperties: []
+        typeProperties: {
+          method: 'GET'
+          headers: {}
+          url: 'https://datausa.io/api/data?drilldowns=Nation&measures=Population'
+        }
+      }
+    ]
+    policy: {
+      elapsedTimeMetric: {}
+    }
+    annotations: []
+  }
+  dependsOn: [
+    'restapi_dataset'
+    'Json_pr_dataset'
+    'RestResource1'
+    'Json_usa_dataset'
+    'DatabricksLinkedService'
+  ]
+}
