@@ -1,0 +1,34 @@
+name: Deploy Azure Data Factory via Bicep
+
+on:
+  push:
+    branches:
+      - main  # or 'main' if that’s your default
+    paths:
+      - '**/*.bicep'
+      - '.github/workflows/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Bicep
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}
+          resourceGroupName: rg-blobstorage
+          template: ./main.bicep
+          parameters: >
+            factoryName='azure-quest'
+            location='East US'
+            BlobStorageLinkedService_servicePrincipalCredential='${{ secrets.SP_SECRET }}'
+            DatabricksLinkedService_accessToken='${{ secrets.DATABRICKS_TOKEN }}'
