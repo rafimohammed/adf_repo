@@ -1,24 +1,32 @@
 param factoryName string
 
-// Placeholder resource references to satisfy dependsOn
+resource dataFactory 'Microsoft.DataFactory/factories@2018-06-01' existing = {
+  name: factoryName
+}
+
 resource BlobStorageLinkedService 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
-  name: '${factoryName}/BlobStorageLinkedService'
+  name: 'BlobStorageLinkedService'
+  parent: dataFactory
 }
 
 resource RestService1 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
-  name: '${factoryName}/RestService1'
+  name: 'RestService1'
+  parent: dataFactory
 }
 
 resource HttpServer_LS 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
-  name: '${factoryName}/HttpServer_LS'
+  name: 'HttpServer_LS'
+  parent: dataFactory
 }
 
 resource HttpServer_LS_usadata 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
-  name: '${factoryName}/HttpServer_LS_usadata'
+  name: 'HttpServer_LS_usadata'
+  parent: dataFactory
 }
 
-resource factoryName_Json_pr_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
-  name: '${factoryName}/Json_pr_dataset'
+resource Json_pr_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
+  name: 'Json_pr_dataset'
+  parent: dataFactory
   properties: {
     linkedServiceName: {
       referenceName: 'BlobStorageLinkedService'
@@ -39,13 +47,11 @@ resource factoryName_Json_pr_dataset 'Microsoft.DataFactory/factories/datasets@2
     }
     schema: {}
   }
-  dependsOn: [
-    BlobStorageLinkedService
-  ]
 }
 
-resource factoryName_Json_usa_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
-  name: '${factoryName}/Json_usa_dataset'
+resource Json_usa_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
+  name: 'Json_usa_dataset'
+  parent: dataFactory
   properties: {
     linkedServiceName: {
       referenceName: 'BlobStorageLinkedService'
@@ -66,13 +72,11 @@ resource factoryName_Json_usa_dataset 'Microsoft.DataFactory/factories/datasets@
     }
     schema: {}
   }
-  dependsOn: [
-    BlobStorageLinkedService
-  ]
 }
 
-resource factoryName_RestResource1 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
-  name: '${factoryName}/RestResource1'
+resource RestResource1 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
+  name: 'RestResource1'
+  parent: dataFactory
   properties: {
     linkedServiceName: {
       referenceName: 'RestService1'
@@ -85,13 +89,11 @@ resource factoryName_RestResource1 'Microsoft.DataFactory/factories/datasets@201
     }
     schema: []
   }
-  dependsOn: [
-    RestService1
-  ]
 }
 
-resource factoryName_restapi_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
-  name: '${factoryName}/restapi_dataset'
+resource restapi_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
+  name: 'restapi_dataset'
+  parent: dataFactory
   properties: {
     linkedServiceName: {
       referenceName: 'HttpServer_LS'
@@ -111,13 +113,11 @@ resource factoryName_restapi_dataset 'Microsoft.DataFactory/factories/datasets@2
     }
     schema: []
   }
-  dependsOn: [
-    HttpServer_LS
-  ]
 }
 
-resource factoryName_restapi_delimited 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
-  name: '${factoryName}/restapi_delimited'
+resource restapi_delimited 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
+  name: 'restapi_delimited'
+  parent: dataFactory
   properties: {
     linkedServiceName: {
       referenceName: 'HttpServer_LS_usadata'
@@ -136,7 +136,4 @@ resource factoryName_restapi_delimited 'Microsoft.DataFactory/factories/datasets
     }
     schema: []
   }
-  dependsOn: [
-    HttpServer_LS_usadata
-  ]
 }
