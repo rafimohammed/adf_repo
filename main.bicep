@@ -1,7 +1,4 @@
-param location string
 param factoryName string = 'azure-quest'
-
-var factoryId = 'Microsoft.DataFactory/factories/${factoryName}'
 
 // Deploy datasets
 module datasets 'modules/datasets.bicep' = {
