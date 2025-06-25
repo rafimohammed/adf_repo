@@ -23,7 +23,6 @@ module linkedservices 'modules/linkedservices.bicep' = {
     restresource1_properties_typeProperties_url: '<REPLACE>'
   }
 }
-
 // Deploy pipelines
 module pipelines 'modules/pipelines.bicep' = {
   name: 'pipelines'
