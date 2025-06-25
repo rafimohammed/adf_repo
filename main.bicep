@@ -1,10 +1,11 @@
 param factoryName string = 'azure-quest'
+param BlobStorageLinkedService_conn string
 
 module linkedservices 'modules/linkedservices.bicep' = {
   name: 'linkedservices'
   params: {
     factoryName: factoryName
-    BlobStorageLinkedService_conn: blobConn
+    BlobStorageLinkedService_conn: BlobStorageLinkedService_conn
     HttpServer_LS_properties_typeProperties_url: '<REPLACE>'
     HttpServer_LS_usadata_properties_typeProperties_url: '<REPLACE>'
     RestService1_properties_typeProperties_url: '<REPLACE>'
