@@ -1,12 +1,5 @@
 param factoryName string = 'azure-quest'
 
-module datasets 'modules/datasets.bicep' = {
-  name: 'datasets'
-  params: {
-    factoryName: factoryName
-  }
-}
-
 module linkedservices 'modules/linkedservices.bicep' = {
   name: 'linkedservices'
   params: {
@@ -18,6 +11,12 @@ module linkedservices 'modules/linkedservices.bicep' = {
   }
 }
 
+module datasets 'modules/datasets.bicep' = {
+  name: 'datasets'
+  params: {
+    factoryName: factoryName
+  }
+}
 module pipelines 'modules/pipelines.bicep' = {
   name: 'pipelines'
   params: {
