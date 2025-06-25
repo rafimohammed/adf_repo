@@ -29,6 +29,5 @@ jobs:
           template: ./main.bicep
           parameters: >
             factoryName='azure-quest'
-            location='East US'
             BlobStorageLinkedService_servicePrincipalCredential='${{ secrets.SP_SECRET }}'
             DatabricksLinkedService_accessToken='${{ secrets.DATABRICKS_TOKEN }}'
