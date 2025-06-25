@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.36.1.42791",
-      "templateHash": "17960416069565600295"
+      "templateHash": "3590764212118943065"
     }
   },
   "parameters": {
@@ -17,7 +17,7 @@
     {
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2018-06-01",
-      "name": "[format('{0}/Json_pr_dataset', parameters('factoryName'))]",
+      "name": "[format('{0}/{1}', parameters('factoryName'), 'Json_pr_dataset')]",
       "properties": {
         "linkedServiceName": {
           "referenceName": "BlobStorageLinkedService",
@@ -42,7 +42,7 @@
     {
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2018-06-01",
-      "name": "[format('{0}/Json_usa_dataset', parameters('factoryName'))]",
+      "name": "[format('{0}/{1}', parameters('factoryName'), 'Json_usa_dataset')]",
       "properties": {
         "linkedServiceName": {
           "referenceName": "BlobStorageLinkedService",
@@ -62,70 +62,6 @@
           }
         },
         "schema": {}
-      }
-    },
-    {
-      "type": "Microsoft.DataFactory/factories/datasets",
-      "apiVersion": "2018-06-01",
-      "name": "[format('{0}/RestResource1', parameters('factoryName'))]",
-      "properties": {
-        "linkedServiceName": {
-          "referenceName": "RestService1",
-          "type": "LinkedServiceReference"
-        },
-        "annotations": [],
-        "type": "RestResource",
-        "typeProperties": {
-          "relativeUrl": "data?drilldowns=Nation&measures=Population"
-        },
-        "schema": []
-      }
-    },
-    {
-      "type": "Microsoft.DataFactory/factories/datasets",
-      "apiVersion": "2018-06-01",
-      "name": "[format('{0}/restapi_dataset', parameters('factoryName'))]",
-      "properties": {
-        "linkedServiceName": {
-          "referenceName": "HttpServer_LS",
-          "type": "LinkedServiceReference"
-        },
-        "annotations": [],
-        "type": "DelimitedText",
-        "typeProperties": {
-          "location": {
-            "type": "HttpServerLocation"
-          },
-          "columnDelimiter": "\t",
-          "rowDelimiter": "\n",
-          "escapeChar": "\\",
-          "firstRowAsHeader": false,
-          "quoteChar": "\""
-        },
-        "schema": []
-      }
-    },
-    {
-      "type": "Microsoft.DataFactory/factories/datasets",
-      "apiVersion": "2018-06-01",
-      "name": "[format('{0}/restapi_delimited', parameters('factoryName'))]",
-      "properties": {
-        "linkedServiceName": {
-          "referenceName": "HttpServer_LS_usadata",
-          "type": "LinkedServiceReference"
-        },
-        "annotations": [],
-        "type": "DelimitedText",
-        "typeProperties": {
-          "location": {
-            "type": "HttpServerLocation"
-          },
-          "columnDelimiter": ",",
-          "escapeChar": "\\",
-          "firstRowAsHeader": true,
-          "quoteChar": "\""
-        },
-        "schema": []
       }
     }
   ]
