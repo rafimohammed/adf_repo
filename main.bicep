@@ -15,6 +15,10 @@ module linkedservices 'modules/linkedservices.bicep' = {
 
 module datasets 'modules/datasets.bicep' = {
   name: 'datasets'
+  dependsOn: [
+    linkedservices
+  ]
+
   params: {
     factoryName: factoryName
   }

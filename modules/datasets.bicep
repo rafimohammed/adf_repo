@@ -4,6 +4,11 @@ resource dataFactory 'Microsoft.DataFactory/factories@2018-06-01' existing = {
   name: factoryName
 }
 
+resource BlobStorageLinkedService 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
+  name: 'BlobStorageLinkedService'
+  parent: dataFactory
+}
+
 resource Json_pr_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
   name: 'Json_pr_dataset'
   parent: dataFactory
