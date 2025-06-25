@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.36.1.42791",
-      "templateHash": "17812792527299519571"
+      "templateHash": "7725806864658344739"
     }
   },
   "parameters": {
@@ -196,7 +196,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.36.1.42791",
-              "templateHash": "6741610097358155675"
+              "templateHash": "9082051389892879518"
             }
           },
           "parameters": {
@@ -220,7 +220,7 @@
             {
               "type": "Microsoft.DataFactory/factories/linkedservices",
               "apiVersion": "2018-06-01",
-              "name": "[format('{0}/HttpServer_LS', parameters('factoryName'))]",
+              "name": "[format('{0}/{1}', parameters('factoryName'), 'HttpServer_LS')]",
               "properties": {
                 "annotations": [],
                 "type": "HttpServer",
@@ -234,7 +234,7 @@
             {
               "type": "Microsoft.DataFactory/factories/linkedservices",
               "apiVersion": "2018-06-01",
-              "name": "[format('{0}/HttpServer_LS_usadata', parameters('factoryName'))]",
+              "name": "[format('{0}/{1}', parameters('factoryName'), 'HttpServer_LS_usadata')]",
               "properties": {
                 "annotations": [],
                 "type": "HttpServer",
@@ -248,7 +248,7 @@
             {
               "type": "Microsoft.DataFactory/factories/linkedservices",
               "apiVersion": "2018-06-01",
-              "name": "[format('{0}/RestService1', parameters('factoryName'))]",
+              "name": "[format('{0}/{1}', parameters('factoryName'), 'RestService1')]",
               "properties": {
                 "annotations": [],
                 "type": "RestService",
@@ -262,7 +262,7 @@
             {
               "type": "Microsoft.DataFactory/factories/linkedservices",
               "apiVersion": "2018-06-01",
-              "name": "[format('{0}/restresource1', parameters('factoryName'))]",
+              "name": "[format('{0}/{1}', parameters('factoryName'), 'restresource1')]",
               "properties": {
                 "annotations": [],
                 "type": "RestService",

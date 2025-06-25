@@ -1,8 +1,5 @@
 param factoryName string = 'azure-quest'
 
-resource dataFactory 'Microsoft.DataFactory/factories@2018-06-01' existing = {
-  name: factoryName
-}
 
 // Deploy datasets
 module datasets 'modules/datasets.bicep' = {

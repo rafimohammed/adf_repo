@@ -4,8 +4,13 @@ param HttpServer_LS_usadata_properties_typeProperties_url string
 param RestService1_properties_typeProperties_url string
 param restresource1_properties_typeProperties_url string
 
-resource factoryName_HttpServer_LS 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' = {
-  name: '${factoryName}/HttpServer_LS'
+resource dataFactory 'Microsoft.DataFactory/factories@2018-06-01' existing = {
+  name: factoryName
+}
+
+resource HttpServer_LS 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' = {
+  name: 'HttpServer_LS'
+  parent: dataFactory
   properties: {
     annotations: []
     type: 'HttpServer'
@@ -15,11 +20,11 @@ resource factoryName_HttpServer_LS 'Microsoft.DataFactory/factories/linkedServic
       authenticationType: 'Anonymous'
     }
   }
-  dependsOn: []
 }
 
-resource factoryName_HttpServer_LS_usadata 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' = {
-  name: '${factoryName}/HttpServer_LS_usadata'
+resource HttpServer_LS_usadata 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' = {
+  name: 'HttpServer_LS_usadata'
+  parent: dataFactory
   properties: {
     annotations: []
     type: 'HttpServer'
@@ -29,11 +34,11 @@ resource factoryName_HttpServer_LS_usadata 'Microsoft.DataFactory/factories/link
       authenticationType: 'Anonymous'
     }
   }
-  dependsOn: []
 }
 
-resource factoryName_RestService1 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' = {
-  name: '${factoryName}/RestService1'
+resource RestService1 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' = {
+  name: 'RestService1'
+  parent: dataFactory
   properties: {
     annotations: []
     type: 'RestService'
@@ -43,10 +48,11 @@ resource factoryName_RestService1 'Microsoft.DataFactory/factories/linkedService
       authenticationType: 'Anonymous'
     }
   }
-  dependsOn: []
 }
+
 resource restresource1 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' = {
-  name: '${factoryName}/restresource1'
+  name: 'restresource1'
+  parent: dataFactory
   properties: {
     annotations: []
     type: 'RestService'
@@ -55,5 +61,4 @@ resource restresource1 'Microsoft.DataFactory/factories/linkedServices@2018-06-0
       authenticationType: 'Anonymous'
     }
   }
-  dependsOn: []
 }
