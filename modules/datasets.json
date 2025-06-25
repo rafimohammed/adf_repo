@@ -1,0 +1,132 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.36.1.42791",
+      "templateHash": "17960416069565600295"
+    }
+  },
+  "parameters": {
+    "factoryName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "name": "[format('{0}/Json_pr_dataset', parameters('factoryName'))]",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "BlobStorageLinkedService",
+          "type": "LinkedServiceReference"
+        },
+        "folder": {
+          "name": "Datasets"
+        },
+        "annotations": [],
+        "type": "Json",
+        "typeProperties": {
+          "location": {
+            "type": "AzureBlobStorageLocation",
+            "fileName": "pr.data.0.Current",
+            "folderPath": "pr",
+            "container": "questblsdata"
+          }
+        },
+        "schema": {}
+      }
+    },
+    {
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "name": "[format('{0}/Json_usa_dataset', parameters('factoryName'))]",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "BlobStorageLinkedService",
+          "type": "LinkedServiceReference"
+        },
+        "folder": {
+          "name": "Datasets"
+        },
+        "annotations": [],
+        "type": "Json",
+        "typeProperties": {
+          "location": {
+            "type": "AzureBlobStorageLocation",
+            "fileName": "population.json",
+            "folderPath": "datausa",
+            "container": "questblsdata"
+          }
+        },
+        "schema": {}
+      }
+    },
+    {
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "name": "[format('{0}/RestResource1', parameters('factoryName'))]",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "RestService1",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "RestResource",
+        "typeProperties": {
+          "relativeUrl": "data?drilldowns=Nation&measures=Population"
+        },
+        "schema": []
+      }
+    },
+    {
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "name": "[format('{0}/restapi_dataset', parameters('factoryName'))]",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "HttpServer_LS",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+          "location": {
+            "type": "HttpServerLocation"
+          },
+          "columnDelimiter": "\t",
+          "rowDelimiter": "\n",
+          "escapeChar": "\\",
+          "firstRowAsHeader": false,
+          "quoteChar": "\""
+        },
+        "schema": []
+      }
+    },
+    {
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "name": "[format('{0}/restapi_delimited', parameters('factoryName'))]",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "HttpServer_LS_usadata",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+          "location": {
+            "type": "HttpServerLocation"
+          },
+          "columnDelimiter": ",",
+          "escapeChar": "\\",
+          "firstRowAsHeader": true,
+          "quoteChar": "\""
+        },
+        "schema": []
+      }
+    }
+  ]
+}

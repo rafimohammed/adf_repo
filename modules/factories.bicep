@@ -1,3 +1,11 @@
+param factoryName string
+param BlobStorageLinkedService_properties_typeProperties_serviceEndpoint string
+param BlobStorageLinkedService_properties_typeProperties_tenant string
+param BlobStorageLinkedService_properties_typeProperties_servicePrincipalId string
+@secure()
+param BlobStorageLinkedService_servicePrincipalCredential string
+param DatabricksLinkedService_accessToken string
+param DatabricksLinkedService_properties_typeProperties_existingClusterId string
 resource factoryName_BlobStorageLinkedService 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' = {
   name: '${factoryName}/BlobStorageLinkedService'
   properties: {

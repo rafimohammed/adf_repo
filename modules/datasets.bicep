@@ -1,8 +1,21 @@
-param HttpServer_LS_properties_typeProperties_url string = 'https://download.bls.gov/pub/time.series/pr/pr.data.0.Current'
-param HttpServer_LS_usadata_properties_typeProperties_url string = 'https://datausa.io/api/'
-param RestService1_properties_typeProperties_url string = 'https://datausa.io/api'
-param restresource1_properties_typeProperties_url string = 'https://download.bls.gov/pub/time.series/pr/'
+param factoryName string
 
+// Placeholder resource references to satisfy dependsOn
+resource BlobStorageLinkedService 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
+  name: '${factoryName}/BlobStorageLinkedService'
+}
+
+resource RestService1 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
+  name: '${factoryName}/RestService1'
+}
+
+resource HttpServer_LS 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
+  name: '${factoryName}/HttpServer_LS'
+}
+
+resource HttpServer_LS_usadata 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
+  name: '${factoryName}/HttpServer_LS_usadata'
+}
 
 resource factoryName_Json_pr_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
   name: '${factoryName}/Json_pr_dataset'
@@ -27,7 +40,7 @@ resource factoryName_Json_pr_dataset 'Microsoft.DataFactory/factories/datasets@2
     schema: {}
   }
   dependsOn: [
-    'BlobStorageLinkedService'
+    BlobStorageLinkedService
   ]
 }
 
@@ -54,7 +67,7 @@ resource factoryName_Json_usa_dataset 'Microsoft.DataFactory/factories/datasets@
     schema: {}
   }
   dependsOn: [
-    'BlobStorageLinkedService'
+    BlobStorageLinkedService
   ]
 }
 
@@ -73,7 +86,7 @@ resource factoryName_RestResource1 'Microsoft.DataFactory/factories/datasets@201
     schema: []
   }
   dependsOn: [
-    'RestService1'
+    RestService1
   ]
 }
 
@@ -99,7 +112,7 @@ resource factoryName_restapi_dataset 'Microsoft.DataFactory/factories/datasets@2
     schema: []
   }
   dependsOn: [
-    'HttpServer_LS'
+    HttpServer_LS
   ]
 }
 
@@ -124,6 +137,6 @@ resource factoryName_restapi_delimited 'Microsoft.DataFactory/factories/datasets
     schema: []
   }
   dependsOn: [
-    'HttpServer_LS_usadata'
+    HttpServer_LS_usadata
   ]
 }

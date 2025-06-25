@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.36.1.42791",
+      "templateHash": "16338788340440100026"
+    }
+  },
+  "parameters": {
+    "factoryName": {
+      "type": "string"
+    },
+    "BlobStorageLinkedService_properties_typeProperties_serviceEndpoint": {
+      "type": "string"
+    },
+    "BlobStorageLinkedService_properties_typeProperties_tenant": {
+      "type": "string"
+    },
+    "BlobStorageLinkedService_properties_typeProperties_servicePrincipalId": {
+      "type": "string"
+    },
+    "BlobStorageLinkedService_servicePrincipalCredential": {
+      "type": "securestring"
+    },
+    "DatabricksLinkedService_accessToken": {
+      "type": "string"
+    },
+    "DatabricksLinkedService_properties_typeProperties_existingClusterId": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.DataFactory/factories/linkedservices",
+      "apiVersion": "2018-06-01",
+      "name": "[format('{0}/BlobStorageLinkedService', parameters('factoryName'))]",
+      "properties": {
+        "annotations": [],
+        "type": "AzureBlobStorage",
+        "typeProperties": {
+          "azureCloudType": "AzurePublic",
+          "serviceEndpoint": "[parameters('BlobStorageLinkedService_properties_typeProperties_serviceEndpoint')]",
+          "tenant": "[parameters('BlobStorageLinkedService_properties_typeProperties_tenant')]",
+          "servicePrincipalId": "[parameters('BlobStorageLinkedService_properties_typeProperties_servicePrincipalId')]",
+          "servicePrincipalCredentialType": "ServicePrincipalKey",
+          "servicePrincipalCredential": {
+            "type": "SecureString",
+            "value": "[parameters('BlobStorageLinkedService_servicePrincipalCredential')]"
+          },
+          "accountKind": "StorageV2"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.DataFactory/factories/linkedservices",
+      "apiVersion": "2018-06-01",
+      "name": "[format('{0}/DatabricksLinkedService', parameters('factoryName'))]",
+      "properties": {
+        "annotations": [],
+        "type": "AzureDatabricks",
+        "typeProperties": {
+          "domain": "https://adb-2155193104848284.4.azuredatabricks.net",
+          "accessToken": {
+            "type": "SecureString",
+            "value": "[parameters('DatabricksLinkedService_accessToken')]"
+          },
+          "existingClusterId": "[parameters('DatabricksLinkedService_properties_typeProperties_existingClusterId')]"
+        }
+      }
+    }
+  ]
+}

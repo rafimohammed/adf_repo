@@ -23,6 +23,15 @@ module linkedservices 'modules/linkedservices.bicep' = {
     factoryName: factoryName
     location: location
     factoryId: factoryId
+    DatabricksLinkedService_accessToken: '<REPLACE>'
+    HttpServer_LS_properties_typeProperties_url: '<REPLACE>'
+    HttpServer_LS_usadata_properties_typeProperties_url: '<REPLACE>'
+    RestService1_properties_typeProperties_url: '<REPLACE>'
+    restresource1_properties_typeProperties_url: '<REPLACE>'
+    BlobStorageLinkedService_properties_typeProperties_serviceEndpoint: '<REPLACE>'
+    BlobStorageLinkedService_properties_typeProperties_tenant: '<REPLACE>'
+    BlobStorageLinkedService_properties_typeProperties_servicePrincipalId: '<REPLACE>'
+    DatabricksLinkedService_properties_typeProperties_existingClusterId: '<REPLACE>'
     BlobStorageLinkedService_servicePrincipalCredential: BlobStorageLinkedService_servicePrincipalCredential
   }
 }

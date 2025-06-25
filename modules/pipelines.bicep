@@ -1,3 +1,24 @@
+param factoryName string
+
+resource restapi_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' existing = {
+  name: '${factoryName}/restapi_dataset'
+}
+
+resource Json_pr_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' existing = {
+  name: '${factoryName}/Json_pr_dataset'
+}
+
+resource RestResource1 'Microsoft.DataFactory/factories/datasets@2018-06-01' existing = {
+  name: '${factoryName}/RestResource1'
+}
+
+resource Json_usa_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' existing = {
+  name: '${factoryName}/Json_usa_dataset'
+}
+
+resource DatabricksLinkedService 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
+  name: '${factoryName}/DatabricksLinkedService'
+}
 resource factoryName_adf_quest_assesment 'Microsoft.DataFactory/factories/pipelines@2018-06-01' = {
   name: '${factoryName}/adf_quest_assesment'
   properties: {
@@ -198,10 +219,10 @@ resource factoryName_adf_quest_assesment 'Microsoft.DataFactory/factories/pipeli
     annotations: []
   }
   dependsOn: [
-    'restapi_dataset'
-    'Json_pr_dataset'
-    'RestResource1'
-    'Json_usa_dataset'
-    'DatabricksLinkedService'
-  ]
+  restapi_dataset
+  Json_pr_dataset
+  RestResource1
+  Json_usa_dataset
+  DatabricksLinkedService
+]
 }
