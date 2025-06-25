@@ -1,7 +1,5 @@
 param factoryName string = 'azure-quest'
 
-
-// Deploy datasets
 module datasets 'modules/datasets.bicep' = {
   name: 'datasets'
   params: {
@@ -9,7 +7,6 @@ module datasets 'modules/datasets.bicep' = {
   }
 }
 
-// Deploy linked services
 module linkedservices 'modules/linkedservices.bicep' = {
   name: 'linkedservices'
   params: {
@@ -20,7 +17,7 @@ module linkedservices 'modules/linkedservices.bicep' = {
     restresource1_properties_typeProperties_url: '<REPLACE>'
   }
 }
-// Deploy pipelines
+
 module pipelines 'modules/pipelines.bicep' = {
   name: 'pipelines'
   params: {
