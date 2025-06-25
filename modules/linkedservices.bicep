@@ -62,3 +62,14 @@ resource restresource1 'Microsoft.DataFactory/factories/linkedServices@2018-06-0
     }
   }
 }
+resource BlobStorageLinkedService 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' = {
+  name: 'BlobStorageLinkedService'
+  parent: dataFactory
+  properties: {
+    type: 'AzureBlobStorage'
+    typeProperties: {
+      connectionString: '<REPLACE_WITH_SECURE_REFERENCE>'
+    }
+    annotations: []
+  }
+}
