@@ -29,3 +29,4 @@ jobs:
           template: ./main.bicep
           parameters: >
             factoryName=azure-quest
+            BlobStorageLinkedService_conn='${{ secrets.BLOB_CONN_STRING }}'

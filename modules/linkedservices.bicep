@@ -1,3 +1,4 @@
+param BlobStorageLinkedService_conn string
 param factoryName string
 param HttpServer_LS_properties_typeProperties_url string
 param HttpServer_LS_usadata_properties_typeProperties_url string
@@ -68,7 +69,7 @@ resource BlobStorageLinkedService 'Microsoft.DataFactory/factories/linkedService
   properties: {
     type: 'AzureBlobStorage'
     typeProperties: {
-      connectionString: '<REPLACE_WITH_SECURE_REFERENCE>'
+      connectionString: BlobStorageLinkedService_conn
     }
     annotations: []
   }

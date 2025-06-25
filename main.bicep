@@ -4,6 +4,7 @@ module linkedservices 'modules/linkedservices.bicep' = {
   name: 'linkedservices'
   params: {
     factoryName: factoryName
+    BlobStorageLinkedService_conn: blobConn
     HttpServer_LS_properties_typeProperties_url: '<REPLACE>'
     HttpServer_LS_usadata_properties_typeProperties_url: '<REPLACE>'
     RestService1_properties_typeProperties_url: '<REPLACE>'
