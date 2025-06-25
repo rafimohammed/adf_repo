@@ -1,22 +1,18 @@
 param factoryName string
-
-resource dataFactory 'Microsoft.DataFactory/factories@2018-06-01' existing = {
-  name: factoryName
-}
-
 resource BlobStorageLinkedService 'Microsoft.DataFactory/factories/linkedServices@2018-06-01' existing = {
   name: 'BlobStorageLinkedService'
   parent: dataFactory
+}
+
+resource dataFactory 'Microsoft.DataFactory/factories@2018-06-01' existing = {
+  name: factoryName
 }
 
 resource Json_pr_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
   name: 'Json_pr_dataset'
   parent: dataFactory
   properties: {
-    linkedServiceName: {
-      referenceName: 'BlobStorageLinkedService'
-      type: 'LinkedServiceReference'
-    }
+  linkedServiceName: BlobStorageLinkedService
     folder: { name: 'Datasets' }
     annotations: []
     type: 'Json'
@@ -35,10 +31,7 @@ resource Json_usa_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' 
   name: 'Json_usa_dataset'
   parent: dataFactory
   properties: {
-    linkedServiceName: {
-      referenceName: 'BlobStorageLinkedService'
-      type: 'LinkedServiceReference'
-    }
+  linkedServiceName: BlobStorageLinkedService
     folder: { name: 'Datasets' }
     annotations: []
     type: 'Json'
