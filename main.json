@@ -5,14 +5,10 @@
     "_generator": {
       "name": "bicep",
       "version": "0.36.1.42791",
-      "templateHash": "4019904728858499276"
+      "templateHash": "17812792527299519571"
     }
   },
   "parameters": {
-    "location": {
-      "type": "string",
-      "defaultValue": "East US"
-    },
     "factoryName": {
       "type": "string",
       "defaultValue": "azure-quest"

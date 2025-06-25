@@ -1,4 +1,3 @@
-param location string = 'East US'
 param factoryName string = 'azure-quest'
 
 // Deploy datasets
