@@ -26,7 +26,6 @@ resource Json_pr_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' =
     schema: {}
   }
 }
-
 resource Json_usa_dataset 'Microsoft.DataFactory/factories/datasets@2018-06-01' = {
   name: 'Json_usa_dataset'
   parent: dataFactory
