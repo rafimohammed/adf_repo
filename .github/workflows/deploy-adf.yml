@@ -36,9 +36,9 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
           pip install databricks-cli
-      
+
           databricks workspace import \
-            notebooks/my-notebook.ipynb \
+            notebooks/quest_data_transform.ipynb \
             /Shared/my-notebook \
             --format JUPYTER \
             --language PYTHON \
