@@ -1,7 +1,17 @@
-# Azure Data Factory Deployment via Bicep 🚀
+# 🏗️ Azure Data Factory + Databricks IaC Deployment
 
-This project automates the deployment of an Azure Data Factory (ADF) instance using Bicep templates and GitHub Actions. 
-It includes modular templates for datasets, pipelines, and linked services — all infrastructure-as-code and version-controlled.
+This project automates the full deployment of an Azure Data Factory pipeline integrated with a Databricks notebook using GitHub Actions,
+Bicep, and Databricks CLI.
+
+### 🔧 Key Features
+- Modular **Bicep architecture** for ADF, datasets, linked services, and pipelines
+- GitHub Actions CI/CD pipeline that deploys ADF resources and uploads Databricks notebooks
+- **Secure secret handling** via Azure Key Vault and Databricks secret scopes
+- Production-ready setup with scheduling and parameterized deployment support
+- Infrastructure-as-Code from ADF pipeline to Databricks execution — fully reproducible
+
+### 💼 Technologies
+Azure Data Factory · Bicep · GitHub Actions · Databricks · Key Vault · CI/CD · Python · IaC
 
 ## 📁 Repository Structure
 adf_repo/
