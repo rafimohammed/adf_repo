@@ -30,3 +30,15 @@ jobs:
           parameters: >
             factoryName=azure-quest
             BlobStorageLinkedService_conn='${{ secrets.BLOB_CONN_STRING }}'
+      - name: Upload Databricks Notebook
+        env:
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: |
+          pip install databricks-cli
+          databricks configure --token <<< "$(echo -e '${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_TOKEN }}')"
+
+          databricks workspace import \
+            notebooks/my-notebook.ipynb \
+            /Shared/my-notebook \
+            --format JUPYTER \
+            --overwrite
